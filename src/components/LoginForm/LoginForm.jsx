@@ -39,7 +39,7 @@ export default function LoginForm() {
                 />
             </label>
             
-            <button className={css.contactForm__btn}type="submit">Add contact</button>
+            <button className={css.contactForm__btn}type="submit">Login</button>
         </form>
     ) 
 }

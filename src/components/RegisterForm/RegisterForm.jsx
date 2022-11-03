@@ -1,22 +1,23 @@
 import css from './RegisterForm.module.css';
 // Redux
-// import { useDispatch } from "react-redux";
-// import { addContact } from "redux/contacts/contacts-operation";
+import { useDispatch } from "react-redux";
+import { signup } from "redux/auth/auth-operation";
 
 export default function RegisterForm() {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        // const form = e.target;
-        // const name = form.elements.name.value;
-        // const phone = form.elements.phone.value;
-        // const action = addContact({name, phone});
-        // dispatch(action);
-        // form.reset();
+        const form = e.target;
+        const name = form.elements.name.value;
+        const email = form.elements.email.value;
+        const password = form.elements.password.value;
+        const action = signup({name, email, password});
+        dispatch(action);
+        form.reset();
     }
 
     return (
@@ -43,12 +44,11 @@ export default function RegisterForm() {
                 <input className={css.contactForm__input}
                     type="password"
                     name="password"
-                    pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     required
                 />
             </label>
             
-            <button className={css.contactForm__btn}type="submit">Add contact</button>
+            <button className={css.contactForm__btn}type="submit">Register</button>
         </form>
     ) 
 }
