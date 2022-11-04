@@ -1,12 +1,14 @@
+import { Navigate } from 'react-router-dom';
 import css from './RegisterForm.module.css';
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "redux/auth/auth-operation";
+import { isLogin } from 'redux/auth/auth-selectors';
 
 export default function RegisterForm() {
 
+    const isUserLogin = useSelector(isLogin);
     const dispatch = useDispatch();
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +20,10 @@ export default function RegisterForm() {
         const action = signup({name, email, password});
         dispatch(action);
         form.reset();
+    }
+
+    if (isUserLogin) {
+        return <Navigate to="/contacts" />
     }
 
     return (
