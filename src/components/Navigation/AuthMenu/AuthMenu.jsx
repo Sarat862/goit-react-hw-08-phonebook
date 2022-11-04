@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function NavAuth() {
+export default function AuthMenu() {
     return (
         <div>
             <Link to="/register">Register</Link>

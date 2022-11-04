@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import NavAuth from "./NavAuth/NavAuth";
+import AuthMenu from "./AuthMenu/AuthMenu";
+import UserMenu from "./UserMenu/UserMenu";
+import { useAuth } from "shared/hooks/useAuth";
 
 export default function Navigation() {
+
+    const isLogin = useAuth();
+
     return (
         <nav style={{display: "flex", justifyContent: "space-between"}}>
             <Link to="/">Logo</Link>
-            <Link to="/contacts">Contacts</Link>
-            <NavAuth />
+            {isLogin && <Link to="/contacts">Contacts</Link>} 
+            {isLogin ? <UserMenu /> : <AuthMenu />}            
         </nav>
     )
 }
