@@ -13,8 +13,8 @@ export const ContactForm = () => {
         
         const form = e.target;
         const name = form.elements.name.value;
-        const phone = form.elements.phone.value;
-        const action = addContact({name, phone});
+        const number = form.elements.number.value;
+        const action = addContact({name, number});
         dispatch(action);
         form.reset();
     }
@@ -34,7 +34,7 @@ export const ContactForm = () => {
             <label className={css.contactForm__field}> Number
                 <input className={css.contactForm__input}
                     type="tel"
-                    name="phone"
+                    name="number"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
