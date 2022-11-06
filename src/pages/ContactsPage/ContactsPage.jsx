@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
 // Components
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
@@ -9,23 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { getState } from 'redux/contacts/contacts-selectors';
 import { getFilteredContacts } from 'redux/contacts/contacts-selectors';
 import { fetchContacts } from "redux/contacts/contacts-operation";
-// Hooks
-import { useAuth } from "shared/hooks/useAuth";
 
 export const ContactsPage = () => {
 
     const contacts = useSelector(getFilteredContacts);
     const { loading, error } = useSelector(getState);
     const dispatch = useDispatch();
-    const isLogin = useAuth();
 
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
-
-    if (!isLogin) {
-        return <Navigate to="/login" />
-    }
 
     return (
         <div>
