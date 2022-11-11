@@ -1,6 +1,8 @@
 import * as api from "shared/api/contactsAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { toast } from 'react-toastify';
+
 function isDublicate({ name }, contacts) {
     const normalizedName = name.toLowerCase();
     const result = contacts.find((contact) => contact.name.toLowerCase() === normalizedName);
@@ -33,7 +35,7 @@ export const addContact = createAsyncThunk(
         condition: (data, { getState }, thunkAPI) => {
             const {contacts} = getState();
             if (isDublicate(data, contacts.items)) {
-                alert(`${data.name} is already in contacts.`);
+                toast.error(`${data.name} is already in contacts`);
                 return thunkAPI.rejectWithValue;
             }
         }

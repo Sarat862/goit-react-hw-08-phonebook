@@ -1,20 +1,28 @@
-import { Link } from "react-router-dom";
-import { AiOutlineContacts } from 'react-icons/ai';
 //Components
 import AuthMenu from "./AuthMenu/AuthMenu";
 import UserMenu from "./UserMenu/UserMenu";
 //Hooks
 import { useAuth } from "shared/hooks/useAuth";
+//MaterialUI
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link } from '@mui/material';
 
 export default function Navigation() {
 
     const isLogin = useAuth();
 
     return (
-        <nav style={{display: "flex", justifyContent: "space-between"}}>
-            <Link to="/"> <AiOutlineContacts size="50" color="rgb(82, 132, 170)" /> </Link>
-            {isLogin && <Link to="/contacts">Contacts</Link>} 
-            {isLogin ? <UserMenu /> : <AuthMenu />}            
-        </nav>
+        <AppBar position="static">
+            <Toolbar sx={{justifyContent: "space-between"}}>
+                <Link to="/" component={RouterLink} color="inherit" underline="none" >
+                    <ContactsIcon />
+                </Link>
+                <Link to="/contacts" component={RouterLink} variant="h5" color="inherit" underline="none">Contacts</Link>
+                {isLogin ? <UserMenu /> : <AuthMenu />}
+            </Toolbar>
+        </AppBar>
     )
 }

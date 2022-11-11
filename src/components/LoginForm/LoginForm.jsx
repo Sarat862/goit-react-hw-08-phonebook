@@ -1,7 +1,11 @@
-import css from './LoginForm.module.css';
 // Redux
 import { useDispatch } from "react-redux";
 import { login } from "redux/auth/auth-operation";
+// MaterialUI
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 export default function LoginForm() {
 
@@ -19,25 +23,38 @@ export default function LoginForm() {
     }
 
     return (
-        <form className={css.contactForm} onSubmit={handleSubmit}>
-            <label className={css.contactForm__field}> Email
-                <input className={css.contactForm__input}
-                    type="email"
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>             
+                <Grid item xs={12}>
+                    <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
                     name="email"
-                    // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    autoFocus
+                    type="email"
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
                     required
-                />
-            </label>
-            
-            <label className={css.contactForm__field}> Password
-                <input className={css.contactForm__input}
-                    type="password"
+                    fullWidth
                     name="password"
-                    required
-                />
-            </label>
-            
-            <button className={css.contactForm__btn}type="submit">Login</button>
-        </form>
+                    label="Password"
+                    type="password"
+                    id="password"
+                    />
+                </Grid>
+            </Grid>
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+            >
+              Login
+            </Button>
+        </Box>
     ) 
 }

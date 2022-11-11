@@ -3,7 +3,7 @@ import { signup, login, logout, current } from "./auth-operation";
 
 const initialState = {
     user: {},
-    token: "",
+    token: null,
     isLogin: false,
     loading: false,
     isLoadingUser: false,
@@ -51,7 +51,7 @@ const authSlice = createSlice({
         [logout.fulfilled]: (state) => {
             state.loading = false;
             state.user = {};
-            state.token = "";
+            state.token = null;
             state.isLogin = false;
         },
         [logout.rejected]: (state, {payload}) => {

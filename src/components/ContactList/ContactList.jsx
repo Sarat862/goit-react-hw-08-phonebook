@@ -1,8 +1,12 @@
-import css from './ContactList.module.css'
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { getFilteredContacts } from 'redux/contacts/contacts-selectors';
 import { deleteContact } from "redux/contacts/contacts-operation";
+//MaterialUI
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function ContactList() {
   
@@ -15,12 +19,20 @@ export function ContactList() {
   }
 
   return (
-    <ul >
+    <List>
       {contacts.map(({ id, name, number }) => 
-        <li className={css.contactList__item} key={id}>{name}: {number}
-          <button className={css.contactList__btn} onClick={()=> onRemoveContact(id)}>Delete</button>          
-        </li>
+        <ListItem key={id}>
+          <Typography variant="h5">
+            {name}: {number}
+          </Typography>
+          <DeleteIcon
+            fontSize="large"
+            color="secondary"
+            onClick={() => onRemoveContact(id)}
+          >
+          </DeleteIcon>          
+        </ListItem>
       )}
-    </ul>
+    </List>
   )
 }

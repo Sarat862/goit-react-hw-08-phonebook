@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "shared/api/authAPI";
 
+import { toast } from 'react-toastify';
+
 export const signup = createAsyncThunk(
     "auth/signup",
     async (data, { rejectWithValue }) => {
@@ -8,11 +10,12 @@ export const signup = createAsyncThunk(
             const result = await api.signup(data);
             return result;
         } catch ({ response }) {
+            toast.error("You have entered invalid data, please try again");
             const error = {
                 status: response.status,
                 statusText: response.statusText,
             }
-            return rejectWithValue(error);
+            return rejectWithValue(error); 
         }
     }
 )
@@ -24,6 +27,7 @@ export const login = createAsyncThunk(
             const result = await api.login(data);
             return result;
         } catch ({ response }) {
+            toast.error("You have entered invalid data, please try again");
             const error = {
                 status: response.status,
                 statusText: response.statusText,
@@ -54,6 +58,9 @@ export const current = createAsyncThunk(
     async (_, { rejectWithValue, getState }) => {
         try {
             const { auth } = getState();
+            if (auth.token === null) {
+                return rejectWithValue();
+            }
             const result = await api.getCurrentUser(auth.token);
             return result;
         } catch ({ response }) {

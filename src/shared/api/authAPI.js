@@ -1,21 +1,16 @@
 import { instance } from "./contactsAPI";
 
-const setToken = (token) => {
-    if (token) {
-        return instance.defaults.headers.common.authorization = `Bearer ${token}`;
-    }
-    return instance.defaults.headers.common.authorization = "";
-}
+const authorizationToken = (token) => instance.defaults.headers.common.authorization = `Bearer ${token}`;
 
 export const signup = async (signupData) => {
     const { data } = await instance.post("/users/signup", signupData);
-    instance.defaults.headers.common.authorization = `Bearer ${data.token}`;
+    authorizationToken(data.token);
     return data;
 }
 
 export const login = async (loginData) => {
     const { data } = await instance.post("/users/login", loginData);
-    instance.defaults.headers.common.authorization = `Bearer ${data.token}`;
+    authorizationToken(data.token);
     return data;
 }
 
@@ -26,11 +21,10 @@ export const logout = async () => {
 
 export const getCurrentUser = async (token) => {
     try {
-        setToken(token);
+        authorizationToken(token);
         const { data } = await instance.get("/users/current");
         return data;
     } catch (error) {
-        setToken();
         throw error;
     }
 }

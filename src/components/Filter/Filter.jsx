@@ -1,8 +1,10 @@
-import css from './Filter.module.css';
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { getFilter } from 'redux/filter/filter-selectors';
 import { setFilter } from "redux/filter/filter-slice";
+//MaterialUI
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
 export function Filter() {
     
@@ -16,8 +18,14 @@ export function Filter() {
 
     return (
         <>
-            <p className={css.filterTitle}>Find contacts by name</p>
-            <input className={css.filterInput} type="text" name="filter" value={filter} onChange={handleChange} />        
+            <Typography variant="h6" sx={{mt:2, mb: 1}}>Find contacts by name</Typography>
+            <TextField
+                size="small"
+                variant="standard"
+                type="text"
+                name="filter"
+                value={filter}
+                onChange={handleChange} />        
         </>
     )
 }
