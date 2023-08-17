@@ -16,11 +16,11 @@ export default function Navigation() {
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{justifyContent: "space-between"}}>
+            <Toolbar sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}}>
                 <Link to="/" component={RouterLink} color="inherit" underline="none" >
                     <ContactsIcon />
                 </Link>
-                <Link to="/contacts" component={RouterLink} variant="h5" color="inherit" underline="none">Contacts</Link>
+                <Link to="/contacts" component={RouterLink} variant="h5" color="inherit" underline="none" sx={{justifySelf: "center"}}>Contacts</Link>
                 {isLogin ? <UserMenu /> : <AuthMenu />}
             </Toolbar>
         </AppBar>

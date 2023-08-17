@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "redux/auth/auth-operation";
 import { getUser } from "redux/auth/auth-selectors";
 //MaterialUI
-import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -18,10 +18,10 @@ export default function UserMenu() {
     }
 
     return (
-        <Toolbar disableGutters>
+        <Box sx={{ justifySelf: "end", display: "flex", alignItems: "center"}}  >
             <AccountCircleIcon />
-            <Typography sx={{ml: "2px", mr: "10px"}} color="black" variant="body1" fontWeight="bold"> {user.email} </Typography>
+            <Typography sx={{ml: "2px", mr: "10px"}} color="#000" variant="body1" fontWeight="bold"> {user.email} </Typography>
             <Button onClick={onLogout} variant="outlined" color="inherit" size="small">Logout</Button>
-        </Toolbar>
+        </Box>
     )
 }
